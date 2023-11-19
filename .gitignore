@@ -8,3 +8,6 @@ captures
 .cxx
 local.properties
 xcuserdata
+
+
+com.moaazelneshawy.kmm.translatorapp.translate.domain.client.NetworkConstants.kt
