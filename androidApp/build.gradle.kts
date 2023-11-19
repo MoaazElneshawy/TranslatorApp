@@ -1,15 +1,18 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.kotlinAndroid)
+    id("com.android.application")
+    kotlin("android")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
+    kotlin("plugin.serialization") version Deps.kotlinVersion
 }
 
 android {
     namespace = "com.moaazelneshawy.kmm.translatorapp.android"
-    compileSdk = 34
+    compileSdk = 33
     defaultConfig {
         applicationId = "com.moaazelneshawy.kmm.translatorapp.android"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
     }
@@ -17,9 +20,9 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+        kotlinCompilerExtensionVersion = Deps.composeVersion
     }
-    packaging {
+    packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -29,20 +32,32 @@ android {
             isMinifyEnabled = false
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
 dependencies {
-    implementation(projects.shared)
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.compose.material3)
-    implementation(libs.androidx.activity.compose)
-    debugImplementation(libs.compose.ui.tooling)
+    implementation(project(":shared"))
+    implementation(Deps.composeUi)
+    implementation(Deps.composeUiTooling)
+    implementation(Deps.composeUiToolingPreview)
+    implementation(Deps.composeFoundation)
+    implementation(Deps.composeMaterial)
+    implementation(Deps.activityCompose)
+    implementation(Deps.composeIconsExtended)
+    implementation(Deps.composeNavigation)
+    implementation(Deps.coilCompose)
+
+    implementation(Deps.hiltAndroid)
+    kapt(Deps.hiltAndroidCompiler)
+    kapt(Deps.hiltCompiler)
+    implementation(Deps.hiltNavigationCompose)
+
+    implementation(Deps.ktorAndroid)
+
+    androidTestImplementation(Deps.testRunner)
+    androidTestImplementation(Deps.jUnit)
+    androidTestImplementation(Deps.composeTesting)
+    debugImplementation(Deps.composeTestManifest)
+
+    kaptAndroidTest(Deps.hiltAndroidCompiler)
+    androidTestImplementation(Deps.hiltTesting)
 }
