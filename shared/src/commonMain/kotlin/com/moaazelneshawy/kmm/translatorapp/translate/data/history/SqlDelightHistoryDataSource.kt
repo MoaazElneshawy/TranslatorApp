@@ -8,6 +8,7 @@ import com.moaazelneshawy.kmm.translatorapp.translate.domain.history.HistoryItem
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.flow.map
+import kotlinx.datetime.Clock
 
 class SqlDelightHistoryDataSource(
     db: TranslateDatabase
@@ -35,7 +36,7 @@ class SqlDelightHistoryDataSource(
             historyItem.fromText,
             historyItem.toLanguageCode,
             historyItem.toText,
-            historyItem.timestamp
+            Clock.System.now().toEpochMilliseconds()
         )
     }
 }
