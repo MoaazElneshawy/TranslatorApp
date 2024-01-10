@@ -12,8 +12,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.moaazelneshawy.kmm.translatorapp.android.translate.core.theme.darkThemeColors
-import com.moaazelneshawy.kmm.translatorapp.android.translate.core.theme.lightThemeColors
+import com.moaazelneshawy.kmm.translatorapp.android.core.theme.darkThemeColors
+import com.moaazelneshawy.kmm.translatorapp.android.core.theme.lightThemeColors
 
 @Composable
 fun TranslatorAppTheme(

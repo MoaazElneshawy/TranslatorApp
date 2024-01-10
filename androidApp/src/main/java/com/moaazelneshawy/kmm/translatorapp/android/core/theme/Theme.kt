@@ -1,4 +1,4 @@
-package com.moaazelneshawy.kmm.translatorapp.android.translate.core.theme
+package com.moaazelneshawy.kmm.translatorapp.android.core.theme
 
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors

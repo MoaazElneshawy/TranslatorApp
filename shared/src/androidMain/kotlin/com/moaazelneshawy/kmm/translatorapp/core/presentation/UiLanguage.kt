@@ -44,7 +44,6 @@ actual class UiLanguage(
                         Language.FRENCH -> R.drawable.french
                         Language.GERMAN -> R.drawable.german
                         Language.GREEK -> R.drawable.greek
-                        Language.HEBREW -> R.drawable.hebrew
                         Language.HINDI -> R.drawable.hindi
                         Language.HUNGARIAN -> R.drawable.hungarian
                         Language.INDONESIAN -> R.drawable.indonesian
