@@ -1,6 +1,7 @@
 package com.moaazelneshawy.kmm.translatorapp.android
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,6 +44,7 @@ fun TranslateRoot() {
         composable(route = Routes.TRANSLATE) {
             val viewModel = hiltViewModel<AndroidTranslateViewModel>()
             val state by viewModel.state.collectAsState()
+            Log.e("TAG", "TranslateRoot: $state" )
             TranslateScreen(state = state, onEvent = viewModel::onEvent)
         }
 

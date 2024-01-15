@@ -1,6 +1,7 @@
 package com.moaazelneshawy.kmm.translatorapp.android.translate.presentation
 
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moaazelneshawy.kmm.translatorapp.translate.domain.TranslateUseCase
