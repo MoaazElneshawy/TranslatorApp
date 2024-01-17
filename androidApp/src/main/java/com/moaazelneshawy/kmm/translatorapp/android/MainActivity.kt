@@ -11,12 +11,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.moaazelneshawy.kmm.translatorapp.android.core.presentation.Routes
 import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.AndroidTranslateViewModel
+import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.screens.LANGUAGE_CODE
+import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.screens.RecordAudioScreen
 import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.screens.TranslateScreen
+import com.moaazelneshawy.kmm.translatorapp.translate.presentation.TranslateEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,9 +51,26 @@ fun TranslateRoot() {
                 val state by viewModel.state.collectAsState()
                 TranslateScreen(
                     state = state,
-                    onEvent = viewModel::onEvent
+                    onEvent = { event ->
+                        if (event == TranslateEvent.RecordAudio) {
+                            navController.navigate(route = Routes.VOICE_TO_TEXT + "/${state.fromLanguage.language.langCode}")
+                        } else viewModel.onEvent(event)
+                    }
                 )
             }
+
+            composable(
+                route = Routes.VOICE_TO_TEXT + "/{$LANGUAGE_CODE}",
+                arguments = listOf(
+                    navArgument(LANGUAGE_CODE) {
+                        type = NavType.StringType
+                        defaultValue = "en"
+                    }
+                )
+            ) {
+                RecordAudioScreen()
+            }
+
 
         })
 }

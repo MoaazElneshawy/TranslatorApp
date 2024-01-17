@@ -9,4 +9,9 @@
     <string name="play_loud">Play Loud</string>
     <string name="copied_to_clipboard">Copied to ClipBoard</string>
     <string name="history">History</string>
+    <string name="service_unavailble">Service is unavailable. Please try later.</string>
+    <string name="client_error">Error from client! Please try later.</string>
+    <string name="server_error">Error from Server. Please try later.</string>
+    <string name="unkown_error">Unkwon error ! Please try later.</string>
+    <string name="record_audio">Record Audio</string>
 </resources>
