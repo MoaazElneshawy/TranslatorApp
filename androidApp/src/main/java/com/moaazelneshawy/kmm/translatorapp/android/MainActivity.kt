@@ -1,7 +1,6 @@
 package com.moaazelneshawy.kmm.translatorapp.android
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -39,14 +38,17 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TranslateRoot() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Routes.TRANSLATE, builder = {
+    NavHost(navController = navController,
+        startDestination = Routes.TRANSLATE, builder = {
 
-        composable(route = Routes.TRANSLATE) {
-            val viewModel = hiltViewModel<AndroidTranslateViewModel>()
-            val state by viewModel.state.collectAsState()
-            Log.e("TAG", "TranslateRoot: $state" )
-            TranslateScreen(state = state, onEvent = viewModel::onEvent)
-        }
+            composable(route = Routes.TRANSLATE) {
+                val viewModel = hiltViewModel<AndroidTranslateViewModel>()
+                val state by viewModel.state.collectAsState()
+                TranslateScreen(
+                    state = state,
+                    onEvent = viewModel::onEvent
+                )
+            }
 
-    })
+        })
 }

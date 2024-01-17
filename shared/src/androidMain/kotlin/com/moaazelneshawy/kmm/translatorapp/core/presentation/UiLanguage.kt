@@ -10,18 +10,19 @@ actual class UiLanguage(
     actual val language: Language
 ) {
 
-    fun toLocale():Locale?{
-            return when(language) {
-                Language.ENGLISH -> Locale.ENGLISH
-                Language.CHINESE -> Locale.CHINESE
-                Language.FRENCH -> Locale.FRENCH
-                Language.GERMAN -> Locale.GERMAN
-                Language.ITALIAN -> Locale.ITALIAN
-                Language.JAPANESE -> Locale.JAPANESE
-                Language.KOREAN -> Locale.KOREAN
-                else -> null
+    fun toLocale(): Locale? {
+        return when (language) {
+            Language.ENGLISH -> Locale.ENGLISH
+            Language.CHINESE -> Locale.CHINESE
+            Language.FRENCH -> Locale.FRENCH
+            Language.GERMAN -> Locale.GERMAN
+            Language.ITALIAN -> Locale.ITALIAN
+            Language.JAPANESE -> Locale.JAPANESE
+            Language.KOREAN -> Locale.KOREAN
+            else -> Locale.forLanguageTag(language.langCode)
         }
     }
+
     actual companion object {
         actual fun byCode(langCode: String): UiLanguage {
             return allLanguages.find { it.language.langCode == langCode }

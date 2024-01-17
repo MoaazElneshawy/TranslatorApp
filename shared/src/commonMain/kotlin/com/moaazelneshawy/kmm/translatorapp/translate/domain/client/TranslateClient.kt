@@ -4,8 +4,8 @@ import com.moaazelneshawy.kmm.translatorapp.core.domain.Language
 
 interface TranslateClient {
     suspend fun translate(
-        textToTranslate: String,
         fromLanguage: Language,
+        fromText: String,
         toLanguage: Language
     ): String
 }

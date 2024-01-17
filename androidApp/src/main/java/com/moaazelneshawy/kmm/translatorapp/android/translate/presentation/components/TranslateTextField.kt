@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -53,7 +54,7 @@ fun TranslateTextField(
     onCopyClick: (String) -> Unit,
     onCloseClick: () -> Unit,
     onSpeakerClick: () -> Unit,
-    onTextFiledClick: () -> Unit,
+    onTextFieldClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -64,22 +65,24 @@ fun TranslateTextField(
             )
             .clip(RoundedCornerShape(20.dp))
             .gradientSurface()
-            .clickable(onClick = onTextFiledClick)
+            .clickable(onClick = onTextFieldClick)
             .padding(16.dp)
     ) {
-        AnimatedContent(targetState = toText) { toText ->
-            if (toText == null || isTranslating) {
-                IdleTranslateField(
+        AnimatedContent(
+            targetState = toText
+        ) { toText ->
+            if(toText == null || isTranslating) {
+                IdleTranslateTextField(
                     fromText = fromText,
                     isTranslating = isTranslating,
-                    onTranslateClick = onTranslateClick,
                     onTextChange = onTextChange,
+                    onTranslateClick = onTranslateClick,
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(2f)
                 )
             } else {
-                TranslatedTextFiled(
+                TranslatedTextField(
                     fromText = fromText,
                     toText = toText,
                     fromLanguage = fromLanguage,
@@ -94,13 +97,86 @@ fun TranslateTextField(
     }
 }
 
+@Composable
+private fun TranslatedTextField(
+    fromText: String,
+    toText: String,
+    fromLanguage: UiLanguage,
+    toLanguage: UiLanguage,
+    onCopyClick: (String) -> Unit,
+    onCloseClick: () -> Unit,
+    onSpeakerClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+    ) {
+        LanguageDisplay(language = fromLanguage)
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = fromText,
+            color = MaterialTheme.colors.onSurface
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Row(
+            modifier = Modifier.align(Alignment.End)
+        ) {
+            IconButton(onClick = {
+                onCopyClick(fromText)
+            }) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.copy),
+                    contentDescription = stringResource(id = R.string.copy),
+                    tint = LightBlue
+                )
+            }
+            IconButton(onClick = onCloseClick) {
+                Icon(
+                    imageVector = Icons.Rounded.Close,
+                    contentDescription = stringResource(id = R.string.close),
+                    tint = LightBlue
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Divider()
+        Spacer(modifier = Modifier.height(16.dp))
+        LanguageDisplay(language = toLanguage)
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = toText,
+            color = MaterialTheme.colors.onSurface
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Row(
+            modifier = Modifier.align(Alignment.End)
+        ) {
+            IconButton(onClick = {
+                onCopyClick(toText)
+            }) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.copy),
+                    contentDescription = stringResource(id = R.string.copy),
+                    tint = LightBlue
+                )
+            }
+            IconButton(onClick = onSpeakerClick) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.speaker),
+                    contentDescription = stringResource(id = R.string.play_loud),
+                    tint = LightBlue
+                )
+            }
+        }
+    }
+}
 
 @Composable
-private fun IdleTranslateField(
+private fun IdleTranslateTextField(
     fromText: String,
     isTranslating: Boolean,
-    onTranslateClick: () -> Unit,
     onTextChange: (String) -> Unit,
+    onTranslateClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var isFocused by remember {
@@ -112,7 +188,7 @@ private fun IdleTranslateField(
             onValueChange = onTextChange,
             cursorBrush = SolidColor(MaterialTheme.colors.primary),
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .onFocusChanged { isFocused = it.isFocused },
             textStyle = TextStyle(
                 color = MaterialTheme.colors.onSurface
@@ -120,72 +196,19 @@ private fun IdleTranslateField(
         )
         if (fromText.isEmpty() && !isFocused) {
             Text(
-                text = stringResource(id = R.string.enter_text_to_translate),
+                text = stringResource(
+                    id =R.string.enter_text_to_translate
+                ),
                 color = LightBlue
             )
         }
-
         ProgressButton(
-            text = stringResource(id = R.string.translate),
+            text = stringResource(
+                id = R.string.translate
+            ),
             isLoading = isTranslating,
             onClick = onTranslateClick,
             modifier = Modifier.align(Alignment.BottomEnd)
         )
     }
-}
-
-@Composable
-private fun TranslatedTextFiled(
-    fromText: String,
-    toText: String,
-    fromLanguage: UiLanguage,
-    toLanguage: UiLanguage,
-    onCopyClick: (String) -> Unit,
-    onCloseClick: () -> Unit,
-    onSpeakerClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-
-    Column(modifier = modifier) {
-        LanguageDisplay(language = fromLanguage)
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(text = fromText, color = MaterialTheme.colors.onSurface)
-        Row(modifier = Modifier.align(Alignment.End)) {
-            IconButton(onClick = { onCopyClick(fromText) }) {
-                Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.copy),
-                    contentDescription = stringResource(id = R.string.copy),
-                    tint = LightBlue
-                )
-            }
-            IconButton(onClick = { onCloseClick() }) {
-                Icon(
-                    imageVector = Icons.Rounded.Close,
-                    contentDescription = stringResource(id = R.string.close),
-                    tint = LightBlue
-                )
-            }
-        }
-        Divider()
-        LanguageDisplay(language = toLanguage)
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(text = toText, color = MaterialTheme.colors.onSurface)
-        Row(modifier = Modifier.align(Alignment.End)) {
-            IconButton(onClick = { onCopyClick(toText) }) {
-                Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.copy),
-                    contentDescription = stringResource(id = R.string.copy),
-                    tint = LightBlue
-                )
-            }
-            IconButton(onClick = { onSpeakerClick() }) {
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.speaker),
-                    contentDescription = stringResource(id = R.string.play_loud),
-                    tint = LightBlue
-                )
-            }
-        }
-    }
-
 }

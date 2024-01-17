@@ -10,46 +10,44 @@ import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import io.ktor.utils.io.errors.IOException
 
 class KtorTranslateClient(
     private val httpClient: HttpClient
-) : TranslateClient {
+): TranslateClient {
+
     override suspend fun translate(
-        textToTranslate: String,
         fromLanguage: Language,
+        fromText: String,
         toLanguage: Language
-    ):String {
+    ): String {
         val result = try {
             httpClient.post {
-                url(TRANSLATE_URL+"/translate")
+                url("$TRANSLATE_URL/translate")
                 contentType(ContentType.Application.Json)
-                setBody {
+                setBody(
                     TranslateDto(
-                        textToTranslate = textToTranslate,
+                        textToTranslate = fromText,
                         sourceLanguageCode = fromLanguage.langCode,
                         targetLanguageCode = toLanguage.langCode
                     )
-                }
+                )
             }
-
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } catch(e: IOException) {
             throw TranslateException(TranslateError.SERVICE_UNAVAILABLE)
         }
 
-        when (result.status.value) {
+        when(result.status.value) {
             in 200..299 -> Unit
-            in 400..499 -> throw TranslateException(TranslateError.CLIENT_ERROR)
             500 -> throw TranslateException(TranslateError.SERVER_ERROR)
+            in 400..499 -> throw TranslateException(TranslateError.CLIENT_ERROR)
             else -> throw TranslateException(TranslateError.UNKNOWN_ERROR)
         }
 
         return try {
             result.body<TranslatedDto>().translatedText
         } catch(e: Exception) {
-            e.printStackTrace()
             throw TranslateException(TranslateError.SERVER_ERROR)
         }
     }
-
 }

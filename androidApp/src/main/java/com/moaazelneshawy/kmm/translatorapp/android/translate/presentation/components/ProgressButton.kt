@@ -1,6 +1,5 @@
 package com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.components
 
-import android.util.Log
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
@@ -18,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 
+
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun ProgressButton(
@@ -26,7 +26,6 @@ fun ProgressButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Log.e("ProgressButton", "ProgressButton: $isLoading")
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(100))
@@ -36,14 +35,18 @@ fun ProgressButton(
         contentAlignment = Alignment.Center
     ) {
         AnimatedContent(targetState = isLoading) { isLoading ->
-            if (isLoading)
+            if (isLoading) {
                 CircularProgressIndicator(
-                    color = MaterialTheme.colors.onPrimary,
                     modifier = Modifier.size(20.dp),
+                    color = MaterialTheme.colors.onPrimary,
                     strokeWidth = 2.dp
                 )
-            else
-                Text(text = text, color = MaterialTheme.colors.onPrimary)
+            } else {
+                Text(
+                    text = text,
+                    color = MaterialTheme.colors.onPrimary
+                )
+            }
         }
     }
 }
