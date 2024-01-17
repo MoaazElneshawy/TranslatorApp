@@ -22,6 +22,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.moaazelneshawy.kmm.translatorapp.android.R
 import com.moaazelneshawy.kmm.translatorapp.android.core.theme.LightBlue
+import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.largeIconSize
+import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.largeSpacerWidth
+import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.padding_10
 import com.moaazelneshawy.kmm.translatorapp.core.presentation.UiLanguage
 
 @Composable
@@ -50,16 +53,16 @@ fun LanguageDropDown(
         Row(
             modifier = Modifier
                 .clickable(onClick = onClick)
-                .padding(10.dp),
+                .padding(padding_10),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
             AsyncImage(
                 model = selectedLanguage.drawableRes,
                 contentDescription = selectedLanguage.language.langName,
-                modifier = Modifier.size(40.dp)
+                modifier = Modifier.size(largeIconSize)
             )
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(largeSpacerWidth))
             Text(
                 text = selectedLanguage.language.langName,
                 color = LightBlue

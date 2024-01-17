@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.largeIconSize
+import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.largeSpacerWidth
 import com.moaazelneshawy.kmm.translatorapp.core.presentation.UiLanguage
 
 @Composable
@@ -25,9 +27,9 @@ fun LanguageDropDownMenuItem(
         Image(
             painter = painterResource(id = language.drawableRes),
             contentDescription = language.language.langName,
-            modifier = Modifier.size(40.dp)
+            modifier = Modifier.size(largeIconSize)
         )
-        Spacer(modifier = Modifier.width(16.dp))
+        Spacer(modifier = Modifier.width(largeSpacerWidth))
         Text(text = language.language.langName)
     }
 }

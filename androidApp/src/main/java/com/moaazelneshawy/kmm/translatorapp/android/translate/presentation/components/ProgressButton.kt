@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.padding_10
 
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -31,7 +32,7 @@ fun ProgressButton(
             .clip(RoundedCornerShape(100))
             .background(MaterialTheme.colors.primary)
             .clickable(onClick = onClick)
-            .padding(8.dp),
+            .padding(padding_10),
         contentAlignment = Alignment.Center
     ) {
         AnimatedContent(targetState = isLoading) { isLoading ->

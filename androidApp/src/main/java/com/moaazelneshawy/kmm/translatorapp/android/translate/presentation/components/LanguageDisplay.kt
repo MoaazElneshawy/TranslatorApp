@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.moaazelneshawy.kmm.translatorapp.android.core.theme.LightBlue
+import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.smallSpacerWidth
 import com.moaazelneshawy.kmm.translatorapp.core.presentation.UiLanguage
 
 @Composable
@@ -22,9 +23,8 @@ fun LanguageDisplay(
         verticalAlignment = Alignment.CenterVertically
     ) {
         SmallLanguageIcon(language = language)
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.width(smallSpacerWidth))
         Text(text = language.language.langName, color = LightBlue)
-
     }
 
 }

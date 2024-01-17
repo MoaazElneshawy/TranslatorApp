@@ -36,9 +36,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.dp
 import com.moaazelneshawy.kmm.translatorapp.android.R
 import com.moaazelneshawy.kmm.translatorapp.android.core.theme.LightBlue
+import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.elevation
+import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.largeSpacerHeight
+import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.padding_16
+import com.moaazelneshawy.kmm.translatorapp.android.translate.presentation.roundCornerSize
 import com.moaazelneshawy.kmm.translatorapp.core.presentation.UiLanguage
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -60,18 +63,18 @@ fun TranslateTextField(
     Box(
         modifier = modifier
             .shadow(
-                elevation = 5.dp,
-                shape = RoundedCornerShape(20.dp)
+                elevation = elevation,
+                shape = RoundedCornerShape(roundCornerSize)
             )
-            .clip(RoundedCornerShape(20.dp))
+            .clip(RoundedCornerShape(roundCornerSize))
             .gradientSurface()
             .clickable(onClick = onTextFieldClick)
-            .padding(16.dp)
+            .padding(padding_16)
     ) {
         AnimatedContent(
             targetState = toText
         ) { toText ->
-            if(toText == null || isTranslating) {
+            if (toText == null || isTranslating) {
                 IdleTranslateTextField(
                     fromText = fromText,
                     isTranslating = isTranslating,
@@ -112,12 +115,12 @@ private fun TranslatedTextField(
         modifier = modifier
     ) {
         LanguageDisplay(language = fromLanguage)
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(largeSpacerHeight))
         Text(
             text = fromText,
             color = MaterialTheme.colors.onSurface
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(largeSpacerHeight))
         Row(
             modifier = Modifier.align(Alignment.End)
         ) {
@@ -138,16 +141,16 @@ private fun TranslatedTextField(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(largeSpacerHeight))
         Divider()
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(largeSpacerHeight))
         LanguageDisplay(language = toLanguage)
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(largeSpacerHeight))
         Text(
             text = toText,
             color = MaterialTheme.colors.onSurface
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(largeSpacerHeight))
         Row(
             modifier = Modifier.align(Alignment.End)
         ) {
@@ -197,7 +200,7 @@ private fun IdleTranslateTextField(
         if (fromText.isEmpty() && !isFocused) {
             Text(
                 text = stringResource(
-                    id =R.string.enter_text_to_translate
+                    id = R.string.enter_text_to_translate
                 ),
                 color = LightBlue
             )
