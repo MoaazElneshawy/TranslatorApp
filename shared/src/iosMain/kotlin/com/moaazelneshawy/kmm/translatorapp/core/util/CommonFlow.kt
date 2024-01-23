@@ -2,12 +2,14 @@ package com.moaazelneshawy.kmm.translatorapp.core.util
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.DisposableHandle
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 actual open class CommonFlow<T> actual constructor(private val flow: Flow<T>) : Flow<T>
 by flow {
+
     fun subscribe(
         coroutineScope: CoroutineScope,
         dispatcher: CoroutineDispatcher,
@@ -16,6 +18,17 @@ by flow {
         val job = coroutineScope.launch(dispatcher) {
             flow.collect(onCollect)
         }
-        return DisposableHandler { job.cancel() }
+        return DisposableHandle { job.cancel() }
+    }
+
+    // we need this for the iOS code as there's no coroutine scope or dispatchers in iOS
+    fun subscribe(
+        onCollect: (T) -> Unit
+    ): DisposableHandle {
+        return subscribe(
+            coroutineScope = GlobalScope,
+            dispatcher = Dispatchers.Main,
+            onCollect = onCollect
+        )
     }
 }
