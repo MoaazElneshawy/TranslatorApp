@@ -35,7 +35,7 @@ extension Color{
     static let darkGray = Color(hex: colors.DarkGrey, alpha: 1)
     
     // this calls the extension init below ( with light-dark)
-    static let primary = Color(light: .accentViolate, dark: .accentViolate)
+    static let primaryColor = Color(light: .accentViolate, dark: .accentViolate)
     static let background = Color(light:.lightBlueGray,dark: .darkGray)
     static let onPrimary = Color( light: .white, dark: .white)
     static let onBackground = Color( light: .textBlack, dark: .white)
