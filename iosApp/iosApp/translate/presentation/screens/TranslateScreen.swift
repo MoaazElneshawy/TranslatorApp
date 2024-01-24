@@ -44,8 +44,27 @@ struct TranslateScreen: View {
                                      onSelectLanguage: {language in
                                         viewModel.onEvent(event: TranslateEvent.ChooseToLanguage(uiLanguage: language))
                     })
+                    
                 }).listRowSeparator(.hidden)
-                    .listRowBackground(Color.background)
+                .listRowBackground(Color.background)
+                
+                TranslateTextField(
+                    fromText: Binding(get: {
+                        // this fromText should read
+                        viewModel.state.fromText
+                    }, set: { value in
+                        // when the value change and we got it
+                        viewModel.onEvent(event: TranslateEvent.ChangeTranslationText(text: value))
+                    }),
+                    toText: viewModel.state.toText,
+                    isTranslating: viewModel.state.isTranslating,
+                    fromLanguage: viewModel.state.fromLanguage,
+                    toLanguage: viewModel.state.toLanguage,
+                    onTranslateEvent: {
+                        viewModel.onEvent(event:$0) //  $0 equals "it" in kotlin
+                    })
+                .padding(.top)
+            
             }.listStyle(.plain)
                 .buttonStyle(.plain)
         }.onAppear(perform: {
