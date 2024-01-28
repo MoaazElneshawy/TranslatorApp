@@ -4,7 +4,10 @@ import SwiftUI
 struct iOSApp: App {
 	var body: some Scene {
 		WindowGroup {
-			ContentView()
+            // simialar to nav host in android
+            NavigationView{
+                ContentView()
+            }
 		}
 	}
 }

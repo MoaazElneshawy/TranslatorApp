@@ -19,6 +19,7 @@
 		0481CF102B61015200ECB856 /* ProgressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481CF0F2B61015200ECB856 /* ProgressButton.swift */; };
 		0481CF122B61049700ECB856 /* TranslateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481CF112B61049700ECB856 /* TranslateTextField.swift */; };
 		04B1808F2B66382500C81AD4 /* TextToSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1808E2B66382500C81AD4 /* TextToSpeech.swift */; };
+		04B180912B66407100C81AD4 /* TranslatedHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B180902B66407100C81AD4 /* TranslatedHistoryItem.swift */; };
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		10D5772444C415DFF3CCEE74 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5968BDD43C8CF97C466EB329 /* Pods_iosApp.framework */; };
@@ -39,6 +40,7 @@
 		0481CF0F2B61015200ECB856 /* ProgressButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressButton.swift; sourceTree = "<group>"; };
 		0481CF112B61049700ECB856 /* TranslateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateTextField.swift; sourceTree = "<group>"; };
 		04B1808E2B66382500C81AD4 /* TextToSpeech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
+		04B180902B66407100C81AD4 /* TranslatedHistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedHistoryItem.swift; sourceTree = "<group>"; };
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				0481CF0D2B6100FA00ECB856 /* LanguageDisplay.swift */,
 				0481CF0F2B61015200ECB856 /* ProgressButton.swift */,
 				0481CF112B61049700ECB856 /* TranslateTextField.swift */,
+				04B180902B66407100C81AD4 /* TranslatedHistoryItem.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				040AD2532B5FABC000965DBA /* LanguageDropDown.swift in Sources */,
 				0425516D2B5D0437009CD5CB /* Colors.swift in Sources */,
 				040AD25C2B5FC4C400965DBA /* TranslateScreen.swift in Sources */,
+				04B180912B66407100C81AD4 /* TranslatedHistoryItem.swift in Sources */,
 				04B1808F2B66382500C81AD4 /* TextToSpeech.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				0481CF122B61049700ECB856 /* TranslateTextField.swift in Sources */,

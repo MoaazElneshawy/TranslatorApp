@@ -38,7 +38,6 @@ struct TranslateTextField: View {
                 fromLanguage: fromLanguage,
                 toLanguage: toLanguage,
                 onTranslateEvent: onTranslateEvent)
-            .padding()
             .cornerRadius(15)
             .animation(.easeInOut, value: isTranslating)
             .shadow(radius: 4)
@@ -116,7 +115,6 @@ private extension TranslateTextField {
                     })
                 }
                 Divider()
-                    .padding()
                 LanguageDisplay(language: toLanguage)
                     .padding(.bottom)
                 Text(toText)
