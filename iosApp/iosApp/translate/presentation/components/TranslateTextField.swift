@@ -133,6 +133,8 @@ private extension TranslateTextField {
                     })
                     Button(action: {
                         // text to speech
+                        let tts = TextToSpeech()
+                        tts.speak(text: toText, languageCode: toLanguage.language.langCode)
                     }, label: {
                         Image(systemName:"speaker.wave.2")
                             .foregroundColor(.lightBlue)
