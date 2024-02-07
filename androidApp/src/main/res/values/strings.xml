@@ -14,4 +14,8 @@
     <string name="server_error">Error from Server. Please try later.</string>
     <string name="unkown_error">Unkwon error ! Please try later.</string>
     <string name="record_audio">Record Audio</string>
+    <string name="apply">Apply</string>
+    <string name="record_again">record again\n</string>
+    <string name="listening">Listening...</string>
+    <string name="waiting_to_talk">Click mic and start talking\t</string>
 </resources>

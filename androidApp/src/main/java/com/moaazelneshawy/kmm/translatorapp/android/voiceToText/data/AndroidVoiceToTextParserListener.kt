@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.speech.SpeechRecognizer.ERROR_CLIENT
 import com.moaazelneshawy.kmm.translatorapp.core.util.CommonStateFlow
 import com.moaazelneshawy.kmm.translatorapp.core.util.toCommonStateFlow
 import com.moaazelneshawy.kmm.translatorapp.voiceToText.domain.VoiceToTextParserListener
@@ -79,6 +80,7 @@ class AndroidVoiceToTextParserListener(private val app: Application)
     }
 
     override fun onError(errorCode: Int) {
+        if (errorCode == ERROR_CLIENT) return
         _state.update {
             it.copy(error = "Error $errorCode")
         }
