@@ -8,22 +8,22 @@ import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import com.moaazelneshawy.kmm.translatorapp.core.util.CommonStateFlow
 import com.moaazelneshawy.kmm.translatorapp.core.util.toCommonStateFlow
-import com.moaazelneshawy.kmm.translatorapp.voiceToText.domain.VoiceToTextListener
-import com.moaazelneshawy.kmm.translatorapp.voiceToText.domain.VoiceToTextState
+import com.moaazelneshawy.kmm.translatorapp.voiceToText.domain.VoiceToTextParserListener
+import com.moaazelneshawy.kmm.translatorapp.voiceToText.domain.VoiceToTextParserState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
-class AndroidVoiceToTextListener(private val app: Application)
-    : VoiceToTextListener, RecognitionListener {
+class AndroidVoiceToTextParserListener(private val app: Application)
+    : VoiceToTextParserListener, RecognitionListener {
 
     private val speechRecognizer = SpeechRecognizer.createSpeechRecognizer(app)
 
-    private val _state = MutableStateFlow<VoiceToTextState>(VoiceToTextState())
-    override val state: CommonStateFlow<VoiceToTextState>
+    private val _state = MutableStateFlow<VoiceToTextParserState>(VoiceToTextParserState())
+    override val state: CommonStateFlow<VoiceToTextParserState>
         get() = _state.toCommonStateFlow()
 
     override fun startListening(languageCode: String) {
-        _state.update { VoiceToTextState() }
+        _state.update { VoiceToTextParserState() }
         if (!SpeechRecognizer.isRecognitionAvailable(app)) {
             _state.update { it.copy(error = "Speech Recognition is not available !") }
             return
@@ -44,7 +44,7 @@ class AndroidVoiceToTextListener(private val app: Application)
     }
 
     override fun stopListening() {
-        _state.update { VoiceToTextState() }
+        _state.update { VoiceToTextParserState() }
         speechRecognizer.stopListening()
     }
 
@@ -53,7 +53,7 @@ class AndroidVoiceToTextListener(private val app: Application)
     }
 
     override fun reset() {
-        _state.value = VoiceToTextState()
+        _state.value = VoiceToTextParserState()
     }
 
     override fun onReadyForSpeech(p0: Bundle?) {

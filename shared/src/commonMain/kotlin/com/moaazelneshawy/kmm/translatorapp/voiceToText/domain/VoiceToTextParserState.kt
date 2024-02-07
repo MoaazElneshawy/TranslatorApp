@@ -1,6 +1,6 @@
 package com.moaazelneshawy.kmm.translatorapp.voiceToText.domain
 
-data class VoiceToTextState(
+data class VoiceToTextParserState(
     val result: String = "",
     val error: String? = null,
     val isSpeaking: Boolean = false,
